@@ -3,7 +3,7 @@ import time,re
 from selenium import webdriver
 import calendar
 ####
-#获取天气预报
+#p爬取天气预报内容
 ####
 class Weather(object):
     def __init__(self):
@@ -69,7 +69,7 @@ class Weather(object):
        return dict,month
 
     def select_month(self, month, driver):
-        driver.find_element_by_xpath('/html/body/div[4]/div[2]/div[2]/div[1]/div/div[4]').click()
+        driver.find_element_by_xpath('//*[@class="zong"]').click()
         driver.implicitly_wait(3)
         month_path = '//div[@class="w_nian"]/ul[2]/li['+month+']'
         driver.find_element_by_xpath(month_path).click()
