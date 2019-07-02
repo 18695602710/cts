@@ -11,7 +11,7 @@ class Weather(object):
         self.month = time.strftime('%m', time.localtime(time.time()))
 
     def get_weather_html(self):
-       #打开中国天气网的40天天气预报的网页
+       #打开中国天气网的40天天气预报的网页，爬取数据
        url = 'http://www.weather.com.cn/weather40d/101020100.shtml'
        driver = webdriver.Chrome()
        driver.get(url)
@@ -70,7 +70,6 @@ class Weather(object):
 
     def select_month(self, month, driver):
         driver.find_element_by_xpath('//*[@class="zong"]').click()
-        driver.implicitly_wait(3)
         month_path = '//div[@class="w_nian"]/ul[2]/li['+month+']'
         driver.find_element_by_xpath(month_path).click()
 
