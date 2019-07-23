@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
 # Define here the models for your spider middleware
 #
@@ -7,6 +7,7 @@
 
 from scrapy import signals
 from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
+from scrapy.downloadermiddlewares.httpproxy import HttpProxyMiddleware
 import random
 
 class MyUserAgentMiddleware(UserAgentMiddleware):
@@ -23,12 +24,12 @@ class MyUserAgentMiddleware(UserAgentMiddleware):
     def process_request(self, request, spider):
         agent = random.choice(self.agents)
         request.headers['User-Agent'] = agent
+        print('now user-agent is:' + agent)
 
     def process_response(self,request,response,spider):
-        print(request.headers['User-Agent'])
         return response
 
-class ProxyMiddleware(object):
+class ProxyMiddleware(HttpProxyMiddleware):
     '''
     设置Proxy
     '''
@@ -43,6 +44,10 @@ class ProxyMiddleware(object):
     def process_request(self, request, spider):
         ip = random.choice(self.ip)
         request.meta['proxy'] = ip
+        print('now ip is:'+ip)
+
+    def process_response(self,request,response,spider):
+        return response
 
 class BossSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,

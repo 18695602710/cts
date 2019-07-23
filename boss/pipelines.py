@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
 # Define your item pipelines here
 #
@@ -21,6 +21,8 @@ class BossPipeline(object):
                 if word != '\t':
                     outstr += word
                     outstr += " "
-        wordcloud = WordCloud(background_color="black", max_words=200, font_path='浪漫雅圆.ttf').generate(outstr)
+        with open(path.join(d, 'zhipin.txt'), 'w+') as f:
+            f.write(outstr)
+        wordcloud = WordCloud(background_color="black", max_words=200, font_path='cts.otf').generate(outstr)
         wordcloud.to_file(path.join(d, "cloud_word.png"))
         return item
