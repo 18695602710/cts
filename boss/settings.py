@@ -59,12 +59,7 @@ USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
     ]
 
-PROXIES = ['https://59.38.61.160:9797', 'http://58.244.52.190:8080', 'https://124.160.56.76:37511',
-           'http://223.245.41.143:65309', 'http://111.224.84.65:9000', 'http://111.231.140.109:8888',
-           'http://222.95.9.93:8080', 'https://61.128.208.94:3128', 'https://113.78.67.55:9797',
-           'https://14.20.235.184:9797', 'https://14.115.105.246:808', 'http://111.207.43.121:80',
-           'http://121.15.254.156:888', 'https://113.247.252.114:9090', 'http://1.196.161.46:9999'
-           ]
+PROXIES = ['http://58.218.200.223:30130','https://58.218.200.223:30187','https://58.218.200.223:30025','https://58.218.200.223:30438','https://58.218.200.223:30339','https://58.218.200.223:30167']
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -100,7 +95,7 @@ DEFAULT_REQUEST_HEADERS = {
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'boss.middlewares.MyUserAgentMiddleware': 100,
-    #'boss.middlewares.ProxyMiddleware': 200,
+    'boss.middlewares.ProxyMiddleware': 200,
 }
 
 # Enable or disable extensions

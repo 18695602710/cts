@@ -18,19 +18,18 @@ class ZhipinSpider(scrapy.Spider):
                   'https://www.zhipin.com/c101020100/?query=python&page=9',
                   'https://www.zhipin.com/c101020100/?query=python&page=10']
 
-    def start_requests(self):
-        for i in self.start_urls:
-            yield scrapy.Request(i, meta={
-                'dont_redirect': True,
-                'handle_httpstatus_list': [302]
-            }, callback=self.parse)
+    # def start_requests(self):
+    #     for i in self.start_urls:
+    #         yield scrapy.Request(i, meta={
+    #             'dont_redirect': True,
+    #             'handle_httpstatus_list': [302]
+    #         }, callback=self.parse)
 
     def parse(self, response):
         job = response.xpath('//*[@class="name"]//@href').extract()
-        print(job)
         job = re.findall('/job_detail.*?.html', str(job))
-        print(job)
-        for i in range(30):
+        print('job:{}'.format(job))
+        for i in range(1):
             print('当前在{}项岗位'.format(i))
             job_url = 'https://www.zhipin.com'+job[i]
             yield scrapy.Request(url=job_url, callback=self.parse_job)
