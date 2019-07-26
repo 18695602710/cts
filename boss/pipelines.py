@@ -23,8 +23,8 @@ class BossPipeline(object):
                     outstr += " "
         with open(path.join(d, 'zhipin.txt'), 'a', encoding='utf-8') as f:
             f.write(outstr)
-        with open(path.join(d, 'zhipin.txt'), encoding='utf-8') as f:
-            text = f.read()
-        wordcloud = WordCloud(background_color="black", max_words=200, font_path='HYQiHeiY4-95W.otf').generate(text)
-        wordcloud.to_file(path.join(d, "cloud_word.png"))
+        # with open(path.join(d, 'zhipin.txt'), encoding='utf-8') as f:
+        #     text = f.read()
+        # wordcloud = WordCloud(background_color="black", max_words=200, font_path='HYQiHeiY4-95W.otf').generate(text)
+        # wordcloud.to_file(path.join(d, "cloud_word.png"))
         return item
