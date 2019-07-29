@@ -36,33 +36,21 @@ class ProxyMiddleware(HttpProxyMiddleware):
 
     def __init__(self, ip):
         self.ip = ip
-    #
-    # @classmethod
-    # def from_crawler(cls, crawler):
-    #     return cls(ip=crawler.settings.get('PROXIES'))
 
-    def get_random_proxy(self):
-        '''随机从文件中读取proxy'''
-        while 1:
-             with open('G:\\Scrapy_work\\myproxies\\myproxies\\proxies.txt', 'r') as f:
-                 proxies = f.readlines()
-             if proxies:
-                break
-             else:
-                time.sleep(1)
-        proxy = random.choice(proxies).strip()
-        return proxy
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(ip=crawler.settings.get('PROXIES'))
 
     def process_request(self, request, spider):
-        ip = self.get_random_proxy()
-        request.meta['proxy'] = ip
+        ip = random.choice(self.ip)
+        request.meta['http_proxy'] = ip
         print('now ip is:'+ip)
 
     def process_response(self,request,response,spider):
         if response.status != 200:
-            ip = self.get_random_proxy()
-            request.meta['proxy'] = ip
-            print('update ip is:' + ip)
+            ip = random.choice(self.ip)
+            request.meta['http_proxy'] = ip
+            print('change ip is:' + ip)
             return request
         return response
 
